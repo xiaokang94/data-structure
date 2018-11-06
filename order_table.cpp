@@ -4,11 +4,14 @@
 
 #include "order_table.h"
 #include <stdlib.h>
+#include <iostream>
+using namespace std;
 /**
  * 构造一个空的线性表 判断L是否为空
  */
 int InitList(SqList &L)
 {
+    // 分配多个地址空间存放 每个ElemNode元素
     L.elem = (ElemNode *)malloc(LIST_INIT_SIZE* sizeof(ElemNode));
     if(!L.elem)
     {
@@ -105,12 +108,12 @@ int NextElem(SqList L,char * cur_e,char * next_e)
  */
 int ListInsert(SqList &L,int i,ElemNode e)
 {
+    // 空间不足时新的地址指针
     ElemNode *newBase;
     ElemNode *q;
     ElemNode *p;
-    // 循环变量
     int j;
-    j = 0;
+    // 循环变量
    // 先判断插入的地方是否合法
    // 再判断链表是否已经满了 ，满了的话要额外分配内存
    // 再插入数据 到链表中去
@@ -126,6 +129,22 @@ int ListInsert(SqList &L,int i,ElemNode e)
       // 增加新的存储容量
       L.listSize += LISTINCREMENT;
    }
+    // 插入数据的地方
+    p = L.elem;
+   if(i>0)
+   {
+       p = L.elem+i-1;
+   }
+   // 插入数据后最后一位数据
+   q = L.elem+L.length+1;
+    // 从最后一位开始 依次向右移动一位
+   for(j = L.length + 1;j >= i;q--,j--)
+   {
+        *q = *(q-1);
+   }
+   *p = e;
+   L.length++;
+   return 0;
 //  return 0;
     // 插入之后的数据后移
     q = &(L.elem[i-1]);

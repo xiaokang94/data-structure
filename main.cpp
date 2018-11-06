@@ -61,8 +61,30 @@
  *     delete [] p;来释放
  *
  *     使用new和delete
+ *
+ *     字符指针如何输出地址
+ *     cout默认将字符指针当作字符串来处理，要想输出地址需要使用强类型转换 如 char * p
+ *
+ *     输出时 cout<<(void *)p<<endl;
+ *
+ *     问题：
+ *     1. 返回类型为字符指针的函数 内部使用new动态分配了内存，应该在何处释放内存？
+ *         ans: 应该在调用该函数结束时 使用delete回收内存
+ *     2. 使用new动态分配内存后 没用delete释放内存 程序结束后操作系统会释放它
+ *
+ *     3.比如使用new为一个字符指针动态分配内存，是分配字符的存储内存的空间吗？ 存储字符的地址递增后 会不会指向到一个新的
+ *     地址那边重要的数据 ，如何判断新的地址是可用的而不是指向重要数据的地址不可用的
+ *
+ *      4. 其中L.elem 为L中的一个元素
+    L.elem = (ElemNode *)malloc(LIST_INIT_SIZE* sizeof(ElemNode));
+ *
+ *
  */
 #include <iostream>
+// 随机数函数
+#include <stdlib.h>
+#include <time.h>
+
 #include "order_table.h"
 using namespace std;
 /**
@@ -71,11 +93,11 @@ using namespace std;
  */
 int orderTableTest();
 void primerTest();
+// 创建个随机字符串
+char * createString(int cLen);
 
 int main() {
-//    orderTableTest();
-    primerTest();
-//    std::cout << "Hello, World!" << std::endl;
+    orderTableTest();
     return 0;
 }
 /**
@@ -86,25 +108,47 @@ int orderTableTest()
 {
     SqList L;
     ElemNode e;
-    int i;
-    char * str = (char *)"abc";
-    e.ch = str;
-    InitList(L);
-//    for(i=1;i < 30;i++)
-//    {
-//        ListInsert(L,i,e);
-//    }
-    cout<<L.elem<<endl;
-  cout<<e.ch<<endl;
+   // 链表的第1个位置插入数据
+   int i = 1;
+   char *strList  ;
+   char *ch ;
+    InitList(L);// 初始化链表
+    for(i=1;i < 30;i++)
+    {
+        // 一个10位数的字符串
+        e.ch =  createString(10);
+        ListInsert(L,i,e);
+    }
+    for(i=1;i<30;i++)
+    {
+        cout<<(L.elem+i-1)->ch<<endl;
+    }
    return 0;
 }
 /**
- * 指针测试方法
+ * 生成字符串
+ * cLen 表示要生成字符串的长度
+ * cnt 生成的个数
+ * new 分配的内存 对应的指针地址递增， 递增后的地址 会不会存有重要的数据？
+ * @return
  */
-void primerTest()
+char * createString(int cLen)
 {
-    int donuts = 6;
-    double cups = 4.5;
-    cout << "donuts vlaue ="<<donuts;
-    cout << " and donuts address = "<<&donuts;
+   // 单个字符串的长度
+   char * ch = new char;
+   // 字符串的初始地址
+   char *tm ;
+   tm = ch;
+   int tmp = 0;
+   // 设置种子数
+    srand (time(NULL));
+   for(tmp=0;tmp < cLen;tmp++)
+   {
+       *ch = 'A'+rand()%26;
+       ch++;
+   }
+   *ch = '\0';
+   ch  =tm;
+   return  ch;
 }
+

@@ -130,31 +130,22 @@ int ListInsert(SqList &L,int i,ElemNode e)
       L.listSize += LISTINCREMENT;
    }
     // 插入数据的地方
-    p = L.elem;
+    q = p = L.elem;
    if(i>0)
    {
-       p = L.elem+i-1;
+       p = p + i - 1;
    }
    // 插入数据后最后一位数据
-   q = L.elem+L.length+1;
+   j = L.length+1;
+   q = q + j;
     // 从最后一位开始 依次向右移动一位
-   for(j = L.length + 1;j >= i;q--,j--)
+   for(j ;j > i;q--,j--)
    {
-        *q = *(q-1);
+        *q = *(q - 1);
    }
    *p = e;
    L.length++;
    return 0;
-//  return 0;
-    // 插入之后的数据后移
-    q = &(L.elem[i-1]);
-    for( p = &(L.elem[L.length - 1]); p>=q; --p )
-    {
-        *(p+1) = *p;
-    }
-    L.elem[i-1] = e;
-    L.length++;
-    return 0;
 }
 /**
  *  线性表L已经存在且非空， 1<=i<=ListLength(L)

@@ -1,12 +1,7 @@
 /**
  *  顺序表基本操作的实现
  */
-
 #include "order_table.h"
-#include "common.h"
-#include <stdlib.h>
-#include <iostream>
-using namespace std;
 /**
  * 构造一个空的顺序表
  */
@@ -32,7 +27,7 @@ int GetElem(OTList L,int i,ElemType &e)
 {
     if(L.length<i|| i<1)
     {
-        exit(LENGTH_OVER_ERROR);
+        return 0;
     }
     e = L.data[i-1];
     return 1;
@@ -101,47 +96,6 @@ int ListDelete(OTList &L,int i,ElemType &e)
   }
   L.length--;
   return 1;
-}
- /**
-  *  线性表已经存在 ，若cur_e是L的数据元素，且不是第一个，则用
-  *  pre_e返回它的操作前驱，否则操作失败，pre_e无定义
-  */
-int PriorElem(OTList L,char * cur_e,char * &pre_e)
-{
-    return 0;
-}
-/**
- * 线性表L已经存在 ，若cur_e是L的1数据元素，且不是最后一个，则用next_e返回它的后继，否则操作失败，next_e无定义
- */
-int NextElem(OTList L,char * cur_e,char * next_e)
-{
-    return 0;
-}
-/**
- * 线性表L已经存在 ，1<=i<=ListLength+1;
- * 在L中第i个位置之前插入新的数据元素e,L的长度加1
- */
-int ListInsert(OTList &L,int i,ElemType e)
-{
-    // 空间不足时新的地址指针
-
-   return 0;
-}
-/**
- *  线性表L已经存在且非空， 1<=i<=ListLength(L)
- *  删除L的第i个数据元素，并用e返回其值，L的长度减1
- */
-int ListDelete(OTList &L,int i,char &e)
-{
-    return 0;
-}
-/**
- * 线性表L已经存在
- * 依次对L的每个数据元素调用函数visit()
- */
-int ListTraverse(OTList L,char visit)
-{
-    return 0;
 }
 
 /**

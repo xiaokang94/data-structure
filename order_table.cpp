@@ -1,167 +1,101 @@
 /**
  *  顺序表基本操作的实现
  */
-
 #include "order_table.h"
-#include <stdlib.h>
-#include <iostream>
-using namespace std;
 /**
- * 构造一个空的线性表 判断L是否为空
+ * 构造一个空的顺序表
  */
-int InitList(SqList &L)
+int InitList(OTList &L)
 {
-    // 分配多个地址空间存放 每个ElemNode元素
-    L.elem = (ElemNode *)malloc(LIST_INIT_SIZE* sizeof(ElemNode));
-    if(!L.elem)
-    {
-        exit(OVERFLOW);
-    }
-    L.length = 0;// 初始化长度
-    L.listSize = LIST_INIT_SIZE;// 表的最大长度
+    L.length = 0;
     return 0;
 }
 /**
- * 线性表已经存在，销毁线性表
+ * 顺序表可以销毁吗
  */
-int DestroyList(SqList &L)
+int DestroyList(OTList &L)
 {
-    free(L.elem);
-    L.elem = NULL;
-    L.length = 0;
-    L.listSize = 0;
     return 1;
 }
-/**
- *  将L重置为空表
- */
-int ClearList(SqList &L)
-{
-    L.length = 0;
-    L.listSize = LIST_INIT_SIZE;
 
-    return 1;
-}
-/**
- *  线性表L已经存在 ，若L为空表 ，则返回TRUE 否则返回FALSE
- */
 
-bool ListEmpty(SqList L)
-{
-    if(L.length == 0)
-    {
-        return true;
-    }else {
-        return false;
-    }
-}
 /**
- * 返回线性表的长度
- * @return
+ *  顺序表L已经存在 ，1<=i<=ListList.length;
+ *  返回L中第i个数据元素的值
  */
-int ListLength(SqList L)
-{
-    return L.length;
-}
-/**
- *  线性表L已经存在 ，1<=i<=ListList.length;
- *  e返回L中第i个数据元素的值
- */
-int GetElem(SqList L,int i,ElemNode &e)
+int GetElem(OTList L,int i,ElemType &e)
 {
     if(L.length<i|| i<1)
     {
-        exit(LENGTH_OVER_ERROR );
+        return 0;
     }
-    e = L.elem[i-1];
+    e = L.data[i-1];
     return 1;
 }
 
 /**
- * 线性表L已经存在，comePare()是数据元素的判定函数
- * 返回L中第一个与e满足关系comepare()的数据元素的位序，若不存在，则返回
- * 0
+ * 根据元素值查找该值在顺序表中的逻辑序号
+ * @param L
+ * @param e
+ * @return
  */
- int LocateElem(SqList L,char e,char *compare)
- {
-    return 0;
- }
+int LocateElem(OTList L,ElemType e)
+{
+    int i;
+    for(i=0;L.data[i]!=e;i++)
+    {
+        if(i >= L.length)
+        {
+            return 0;
+        }
+    }
+    return i+1;
+}
 
- /**
-  *  线性表已经存在 ，若cur_e是L的数据元素，且不是第一个，则用
-  *  pre_e返回它的操作前驱，否则操作失败，pre_e无定义
-  */
-int PriorElem(SqList L,char * cur_e,char * &pre_e)
+/**
+ * 插入数据到顺序表中 插入i之后的元素向后移动
+ * @param L
+ * @param e
+ * @param i 逻辑序号 从1开始
+ * @return
+ */
+int ListInsert(OTList &L,ElemType e,int i)
 {
-    return 0;
+    int j;// 物理序号
+    if(i < 1||i > L.length+1 || L.length == LIST_INIT_SIZE)
+    {
+        return 0;
+    }
+    for(j = L.length;j >= i;j--)
+    {
+       L.data[j] = L.data[j-1];
+    }
+    L.data[i-1] = e;
+    L.length++;
+
+    return 1;
 }
 /**
- * 线性表L已经存在 ，若cur_e是L的1数据元素，且不是最后一个，则用next_e返回它的后继，否则操作失败，next_e无定义
+ * 删除第i个元素,i之后的元素向左移动
+ * @param L
+ * @param i
+ * @param e 删除返回的值
+ * @return
  */
-int NextElem(SqList L,char * cur_e,char * next_e)
+int ListDelete(OTList &L,int i,ElemType &e)
 {
-    return 0;
-}
-/**
- * 线性表L已经存在 ，1<=i<=ListLength+1;
- * 在L中第i个位置之前插入新的数据元素e,L的长度加1
- */
-int ListInsert(SqList &L,int i,ElemNode e)
-{
-    // 空间不足时新的地址指针
-    ElemNode *newBase;
-    ElemNode *q;
-    ElemNode *p;
-    int j;
-    // 循环变量
-   // 先判断插入的地方是否合法
-   // 再判断链表是否已经满了 ，满了的话要额外分配内存
-   // 再插入数据 到链表中去
-   if( i < 0 || i > L.length + 1 )
+    int j;// 物理序号
+   if(i < 1 || i > L.length+1 || L.length == 0)
    {
-       exit(LENGTH_OVER_ERROR);
+       return 0;
    }
-   // 额外分配空间
-   if( L.length == L.listSize )
-   {
-      newBase = (ElemNode *)realloc(L.elem,(L.listSize+LISTINCREMENT)* sizeof(ElemNode));// 分配新的存储空间
-      L.elem = newBase;
-      // 增加新的存储容量
-      L.listSize += LISTINCREMENT;
-   }
-    // 插入数据的地方
-    q = p = L.elem;
-   if(i>0)
-   {
-       p = p + i - 1;
-   }
-   // 插入数据后最后一位数据
-   j = L.length+1;
-   q = q + j;
-    // 从最后一位开始 依次向右移动一位
-   for(j ;j > i;q--,j--)
-   {
-        *q = *(q - 1);
-   }
-   *p = e;
-   L.length++;
-   return 0;
-}
-/**
- *  线性表L已经存在且非空， 1<=i<=ListLength(L)
- *  删除L的第i个数据元素，并用e返回其值，L的长度减1
- */
-int ListDelete(SqList &L,int i,char &e)
-{
-    return 0;
-}
-/**
- * 线性表L已经存在
- * 依次对L的每个数据元素调用函数visit()
- */
-int ListTraverse(SqList L,char visit)
-{
-    return 0;
+   e = L.data[i-1];
+  for(j = i;j < L.length;j++)
+  {
+     L.data[j-1] = L.data[j];
+  }
+  L.length--;
+  return 1;
 }
 
 /**

@@ -150,79 +150,28 @@
 #include <iostream>
 // 随机数函数
 #include <stdlib.h>
+
 #include <time.h>
 // 系统限制文件
 #include<climits>
-#include "order_table.h"
+// 通用的自定义函数及其实现
+#include "common.h"
+// 数据结构相关头文件
+#include "data_structure.h"
+// 顺序表的测试用例
+#include "order_table_example.h"
+
 using namespace std;
 /**
  * 声明函数
  * @return
  */
-int orderTableTest();
-void primerTest();
-// 创建个随机字符串
-char * createString(int cLen);
 
 int main() {
     char ch = 'M';
-    char alarm ='\a';
+    char alarm ='a';
     cout<<alarm<<endl;
-    cout.put('!');
     return 0;
 }
-/**
- * 顺序表测试
- * @return
- */
-int orderTableTest()
-{
-    SqList L;
-    ElemNode e[5];
-    ElemNode a;
-   // 链表的第1个位置插入数据
-   int i ;
-   char *ch ;
-    InitList(L);// 初始化链表
-    for(i = 0;i < 5;i++)
-    {
-        e[i].ch = new char;
-        // 一个10位数的字符串
-        e[i].ch =  createString(10);
-        ListInsert(L,i+1,e[i]);
-    }
-    for(i = 0;i < 5;i++)
-    {
-        L.elem = L.elem +1;
-        cout<<(void *)(L.elem)<<endl;
-        cout<<(L.elem)->ch<<endl;
-    }
-   return 0;
-}
-/**
- * 生成字符串
- * cLen 表示要生成字符串的长度
- * cnt 生成的个数
- * new 分配的内存 对应的指针地址递增， 递增后的地址 会不会存有重要的数据？
- * @return
- */
-char * createString(int cLen)
-{
-   // 单个字符串的长度
-   char * ch = new char;
-   // 字符串的初始地址
-   char *tm ;
-   tm = ch;
-   int tmp = 0;
-   // 设置种子数
-    srand (time(NULL));
-   for(tmp=0;tmp < cLen;tmp++)
-   {
-       *ch = 'A'+rand()%26;
-       ch++;
-   }
-   *ch = '\0';
-   ch  =tm;
-   return  ch;
-}
+
 

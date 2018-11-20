@@ -168,9 +168,10 @@ using namespace std;
  */
 
 int main() {
-    char ch = 'M';
-    char alarm ='a';
-    cout<<alarm<<endl;
+    OTList L;
+    OTList L2;
+    L = MergeTest();
+    L2 = InsertOrderTest();
     return 0;
 }
 

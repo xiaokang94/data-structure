@@ -7,5 +7,17 @@
 
 #ifndef DATA_STRUCTURE_ORDER_TABLE_EXAMPLE_H
 #define DATA_STRUCTURE_ORDER_TABLE_EXAMPLE_H
-
+#include "common.h"
+// 创建一个随机满数据的有序表
+OTList createOrderTable();
+// 冒泡排序
+int BubbleSort(OTList &L);
+// 顺序表合并
+int Merge(OTList L1,OTList L2,OTList &L3);
+// 顺序表二路归并测试
+OTList MergeTest();
+// 顺序表L 有序，插入元素e之后依然有序
+void insert(OTList &L,ElemType e);
+// 顺序表L 有序、插入元素e之后依然有序测试方法
+OTList InsertOrderTest();
 #endif //DATA_STRUCTURE_ORDER_TABLE_EXAMPLE_H

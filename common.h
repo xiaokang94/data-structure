@@ -35,6 +35,12 @@ typedef struct
    int maxSize = LIST_INIT_SIZE;
 }OTList;
 
+//链表节点结构体定义
+typedef struct LLNode
+{
+    ElemType data;
+    struct LLNode *next;// 指向下一个个基点
+}LinkList;
 
 /**
  * 自定义函数声明

@@ -11,4 +11,7 @@
  */
 int InitList(OTList &L);// 初始化链表
 int ListInsert(OTList &L,int i,ElemType e);// 链表里插入元素
+int ListDelete(OTList &L,int i,ElemType &e);
+
+
 #endif //LINEAR_LIST_ORDER_TABLE_H

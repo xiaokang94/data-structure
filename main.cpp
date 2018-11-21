@@ -170,8 +170,14 @@ using namespace std;
 int main() {
     OTList L;
     OTList L2;
-    L = MergeTest();
-    L2 = InsertOrderTest();
+    OTList L3;
+    // 有序顺序表的归并算法
+//    L = MergeTest();
+    // 顺序表有序 插入一个数据后仍然有序
+//    L2 = InsertOrderTest();
+//    L3 = DeleteElemTest();
+    // 逆置操作
+    reverseTest();
     return 0;
 }
 

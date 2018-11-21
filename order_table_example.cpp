@@ -27,7 +27,7 @@ OTList MergeTest()
   return L3;
 }
 /**
- *
+ * 有序顺序表中插入一个数据 使之插入之后的顺序表依然有序
  * @return
  */
 OTList InsertOrderTest()
@@ -41,6 +41,35 @@ OTList InsertOrderTest()
    BubbleSort(L);
     insert(L,e);
     return L;
+}
+/**
+ *  删除节点测试
+ * @return
+ */
+OTList DeleteElemTest()
+{
+    OTList L;
+    ElemType e;
+    int i;
+    srand((unsigned)time(NULL));
+    //    i 生成1到49的随机数、
+    i = rand()%49;
+    i= i+1;
+    L = createOrderTable();
+    // 删除第i个节点 将删除的数据返回到e中
+    ListDelete(L,i,e);
+    return L;
+}
+/**
+ * 将顺序表逆置操作
+ *
+ * @return
+ */
+OTList reverseTest()
+{
+    OTList L;
+    L = createOrderTable();
+   reverse(L);
 }
 /**
  * 创建一个顺序表 表的长度为 LIST_INIT_SIZE/2
@@ -183,4 +212,23 @@ void insert(OTList &L,ElemType e)
     ListInsert(L,e,pos);
 
 }
-
+/**
+ * 将顺序表所有的元素逆置，算法空间复杂度为O(1)
+ * 思想：将顺序表的前半部分和后半部分对应的元素 L.data[L.length-i-1]进行交换，0<=i<L.length/2
+ * @param L
+ * @return
+ */
+int reverse(OTList &L)
+{
+   int i;
+   int maxPos;
+   ElemType e;
+   maxPos = L.length/2;
+   for(i = 0;i < maxPos;i++)
+   {
+      e = L.data[i];
+      L.data[i] = L.data[L.length-i-1] ;
+      L.data[L.length-i-1] =e;
+   }
+   return 0;
+}

@@ -32,6 +32,7 @@ typedef struct
 {
    ElemType data[LIST_INIT_SIZE];
    int length;
+   int maxSize = LIST_INIT_SIZE;
 }OTList;
 
 

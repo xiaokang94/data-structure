@@ -4,6 +4,8 @@
  *  本文件主要是链表操作的基本文件 包含链表的创建（头插法和尾插法创建链表）,链表添加节点，删除节点
  */
 #include "link_list_table.h"
+#include <iostream>
+using namespace std;
 // 创建一个包含头节点的链表,
 /**
  *  创建一个包含头节点的链表
@@ -13,7 +15,7 @@ LinkList * InitList()
 {
     LinkList *L;
     L = (LinkList *)malloc(sizeof(LinkList));
-    L->next =NULL:
+    L->next =NULL;
     return L;
 }
 /**
@@ -22,7 +24,7 @@ LinkList * InitList()
  * @param dat 插入时的数据数组
  * @return
  */
-LinkList * createLinkListFirst(ElemType dat[])
+LinkList * createLinkListFirst(const ElemType dat[])
 {
    LinkList *L;
    // 插入时的节点
@@ -50,7 +52,7 @@ LinkList * createLinkListFirst(ElemType dat[])
  * @param dat
  * @return
  */
-LinkList * createLinkListTail(ElemType dat[])
+LinkList * createLinkListTail(const ElemType dat[])
 {
    LinkList *L;
    // 插入的节点的信息
@@ -72,4 +74,21 @@ LinkList * createLinkListTail(ElemType dat[])
        tail = node;
    }
    return L;
+}
+/**
+ * 遍历链表中的数据域
+ * @param L
+ * @return
+ */
+int traverseList(LinkList *L)
+{
+    LinkList *p;
+    p = L;
+    while(p!=NULL)
+    {
+        p = p->next;
+        cout<<p->data<<",";
+    }
+    cout<<endl;
+   return 0;
 }

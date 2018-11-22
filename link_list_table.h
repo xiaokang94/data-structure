@@ -7,7 +7,12 @@
 #include "common.h"
 #include "stdlib.h"
 // 尾插法创建单链表
-LinkList * createLinkListTail(ElemType dat[])
+LinkList * createLinkListTail(const ElemType dat[]);
 // 头插法创建单链表
-LinkList * createLinkListFirst(ElemType dat[])
+LinkList * createLinkListFirst(const ElemType dat[]);
+// 初始化链表
+LinkList * InitList();
+// 遍历链表中的数据域 控制台输出 各个值用逗号隔开
+int traverseList(LinkList *L);
+
 #endif //DATA_STRUCTURE_LINK_LIST_TABLE_H

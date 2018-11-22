@@ -160,6 +160,8 @@
 #include "data_structure.h"
 // 顺序表的测试用例
 #include "order_table_example.h"
+// 链表测试用例
+#include "link_list_table_example.h"
 
 using namespace std;
 /**
@@ -170,14 +172,16 @@ using namespace std;
 int main() {
     OTList L;
     OTList L2;
-    OTList L3;
+   OTList L3;
+
     // 有序顺序表的归并算法
 //    L = MergeTest();
     // 顺序表有序 插入一个数据后仍然有序
 //    L2 = InsertOrderTest();
 //    L3 = DeleteElemTest();
     // 逆置操作
-    reverseTest();
+//    reverseTest();
+    CreateLinkListTest();
     return 0;
 }
 

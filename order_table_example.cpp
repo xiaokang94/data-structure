@@ -70,6 +70,7 @@ OTList reverseTest()
     OTList L;
     L = createOrderTable();
    reverse(L);
+   return L;
 }
 /**
  * 创建一个顺序表 表的长度为 LIST_INIT_SIZE/2

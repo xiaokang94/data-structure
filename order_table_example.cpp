@@ -75,16 +75,17 @@ OTList reverseTest()
 /**
  * 创建一个顺序表 表的长度为 LIST_INIT_SIZE/2
  * 数据元素随机
+ * @param len 创建一个长度为len的顺序表
  * @return
  */
-OTList createOrderTable()
+OTList createOrderTable(int len)
 {
     ElemType e;
     OTList L;
     int i;
     InitList(L);
     srand((unsigned)time(NULL));
-    for(i = 1;i <= LIST_INIT_SIZE/2;i++)
+    for(i = 1;i <= len;i++)
     {
         e = rand()%123;
         ListInsert(L,e,i);
@@ -233,3 +234,70 @@ int reverse(OTList &L)
    }
    return 0;
 }
+/**
+ * 将顺序表中数据的下标为posStart 到posEnd中的数据逆置
+ * @param L 顺序表
+ * @param posStart 需要逆置元素的起始位置(逻辑位置 从0开始）
+ * @param posEnd 需要逆置元素的终止位置(逻辑位置，从0开始
+ * @return
+ */
+int reverseByPos(OTList &L,int posStart,int posEnd)
+{
+    int i = 0;
+    ElemType e;
+    // 需要逆置的数据段中中间值在顺序表中的数据域的位置
+    int midPos;
+    if(posStart < 0|| posEnd < 0||posStart > posEnd || posEnd >L.length)
+    {
+        return 0;
+    }
+    midPos = (posEnd -posStart+1)/2;
+
+    for(i = 0;i < midPos;i++)
+    {
+       e = L.data[posStart+i];
+       L.data[i] = L.data[posEnd-i];
+       L.data[posEnd - i] = e;
+    }
+    return 0;
+}
+/**
+ * 设将n(n>1)个整数存放到一维数组R中，试设计一个时间和空间两方面尽可能高的算法，将R中整数序列循环左移p(0<p<n)个位置，即将R中的数据序列
+ * （x0,x1,...,xn-1)变换成（xp,xp+1,...,xn-1,x0,x1,...xp-1)
+ * 思想：
+ *
+ * （x0,x1,...xn-1) => (xn-1,xn-2,...,xp+1,xp,xp-1,..,x1,x0) => (xp,xp+1,xp+2,...,xn-2,xn-1,xp-1,xp-2,...,x1,x0)
+ * =>(xp,xp+1,xp+2,...,x0,x1,..xp-2,xp-1）
+ * 第一次 全数组逆置，第二次 前n-p个元素逆置，第三次 将剩余的元素逆置
+ *
+ */
+
+int reverseShiftTest()
+{
+   OTList L;
+   int p = 5;
+   int len;
+   len = 21;
+    // 创建一个顺序表
+   L = createOrderTable(len);
+   // 遍历输出数据域
+   cout<<"原始的顺序表中的值为：";
+   traverseList(L);
+   // 逆置整个顺序表
+   reverseByPos(L,0,len-1);
+   cout<< "全部逆置之后的值为：";
+   traverseList(L);
+   reverseByPos(L,0,len-1-p);
+   cout<< "前len-p个值逆置为：";
+   traverseList(L);
+   reverseByPos(L,len-p,len-1);
+   cout<<"后p个值逆置为：";
+   traverseList(L);
+}
+/**
+ * 设计一个高效的算法，从顺序表中删除所有元素值为x的元素，要求空间复杂度为O(1)
+ */
+ /**
+  * 遍历顺序表来新建一个顺序表，新的顺序表恭喜
+  */
+

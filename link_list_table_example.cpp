@@ -20,7 +20,9 @@ int CreateLinkListTest()
    LinkList *L2;
    ElemType dat[10];
    int i ;
-   CreateDataList(dat);
+   int len;
+   len =sizeof(dat)/sizeof(ElemType);
+   CreateDataList(dat,len);
    L = InitList();
    cout<<"链表插入前的序列:";
    for(i=0;i<10;i++)
@@ -28,8 +30,8 @@ int CreateLinkListTest()
       cout<<dat[i]<<",";
    }
    cout<<endl;
-  L = createLinkListFirst(dat);
-  L2 = createLinkListTail(dat);
+  L = createLinkListFirst(dat,len);
+  L2 = createLinkListTail(dat,len);
   cout<<"头插法插入后的值为:";
   traverseList(L);
   cout<<"尾插法插入后的值为:";
@@ -38,17 +40,15 @@ int CreateLinkListTest()
 }
 /**
  * 随机生成一个数组中的元素
- * @param dat
- * @param n
+ * @param dat 数据
+ * @param len 长度
  * @return
  */
-int CreateDataList( ElemType dat[])
+int CreateDataList( ElemType dat[],int len)
 {
    int i;
-   int n;
-   n = sizeof(dat)/sizeof(ElemType);
    srand((unsigned)time(NULL));
-   for(i=0;i<n;i++)
+   for(i=0;i<len;i++)
    {
       dat[i] = rand()%1000;
    }

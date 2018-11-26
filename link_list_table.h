@@ -7,9 +7,9 @@
 #include "common.h"
 #include "stdlib.h"
 // 尾插法创建单链表
-LinkList * createLinkListTail(const ElemType dat[]);
+LinkList * createLinkListTail(const ElemType dat[],int len);
 // 头插法创建单链表
-LinkList * createLinkListFirst(const ElemType dat[]);
+LinkList * createLinkListFirst(const ElemType dat[],int len);
 // 初始化链表
 LinkList * InitList();
 // 遍历链表中的数据域 控制台输出 各个值用逗号隔开

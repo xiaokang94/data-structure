@@ -2,6 +2,8 @@
  *  顺序表基本操作的实现
  */
 #include "order_table.h"
+#include <iostream>
+using namespace std;
 /**
  * 构造一个空的顺序表
  */
@@ -97,7 +99,22 @@ int ListDelete(OTList &L,int i,ElemType &e)
   L.length--;
   return 1;
 }
+/**
+ * 遍历输出顺序表的的数据域（基本数据类型）
+ * @param L
+ * @return
+ */
+int traverseList(OTList L)
+{
+    int i = 0;
 
+    for(i=0;i<L.length;i++)
+    {
+        cout << L.data[i]<<",";
+    }
+    cout << endl;
+    return 0;
+}
 /**
  * 下面是线性表中更复杂的操作 高级操作 如线性表的合并，拆分，元素排序等 在摸一个地方插入多个链表
  */

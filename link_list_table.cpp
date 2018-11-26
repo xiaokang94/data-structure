@@ -22,19 +22,17 @@ LinkList * InitList()
  *  采用头插法创建一个单链表,一直在头部后面添加节点
  *  特点： 头插法创建的链表和数据插入时的顺序逆序
  * @param dat 插入时的数据数组
+ * @param len 数组的长度
  * @return
  */
-LinkList * createLinkListFirst(const ElemType dat[])
+LinkList * createLinkListFirst(const ElemType dat[],int len)
 {
    LinkList *L;
    // 插入时的节点
    LinkList *node;
    // 数组的长度
-   int len;
    int i;
-
    L = InitList();
-   len = sizeof(dat)/sizeof(ElemType);
    for(i=0;i<len;i++)
    {
        // 为插入时的节点分配存储空间
@@ -50,21 +48,20 @@ LinkList * createLinkListFirst(const ElemType dat[])
  * 采用尾插法创建链表 一直在尾部添加节点
  * 特点：创建的链表顺序和 数组参数时传入的顺序相同
  * @param dat
+ * @param len 数组的长度
  * @return
  */
-LinkList * createLinkListTail(const ElemType dat[])
+LinkList * createLinkListTail(const ElemType dat[],int len)
 {
    LinkList *L;
    // 插入的节点的信息
    LinkList *node;
    // 尾部节点的值
    LinkList *tail;
-   int len;
    int i;
    //   初始化L链表
    L = InitList();
    tail = L;
-   len = sizeof(dat)/sizeof(ElemType);
    for(i = 0;i < len;i++)
    {
        node = (LinkList *)malloc(sizeof(LinkList));
@@ -76,18 +73,19 @@ LinkList * createLinkListTail(const ElemType dat[])
    return L;
 }
 /**
- * 遍历链表中的数据域
+ * 遍历链表中的数据域 数据域尾基本数据类型
+ * 遍历的是带头结点的数据
  * @param L
  * @return
  */
 int traverseList(LinkList *L)
 {
     LinkList *p;
-    p = L;
+    p = L->next;
     while(p!=NULL)
     {
-        p = p->next;
         cout<<p->data<<",";
+        p = p->next;
     }
     cout<<endl;
    return 0;

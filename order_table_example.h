@@ -8,8 +8,8 @@
 #ifndef DATA_STRUCTURE_ORDER_TABLE_EXAMPLE_H
 #define DATA_STRUCTURE_ORDER_TABLE_EXAMPLE_H
 #include "common.h"
-// 创建一个随机满数据的有序表
-OTList createOrderTable();
+// 创建一个长度为len的顺序表
+OTList createOrderTable(int len =50);
 // 冒泡排序
 int BubbleSort(OTList &L);
 // 顺序表合并
@@ -26,5 +26,6 @@ OTList InsertOrderTest();
 OTList DeleteElemTest();
 // 顺序表逆置测试
 OTList reverseTest();
-
+// 顺序表逆置多次逆置
+int reverseShiftTest();
 #endif //DATA_STRUCTURE_ORDER_TABLE_EXAMPLE_H

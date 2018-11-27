@@ -294,12 +294,58 @@ int reverseShiftTest()
    cout<<"后p个值逆置为：";
    traverseList(L);
 }
+
+
 /**
  * 设计一个高效的算法，从顺序表中删除所有元素值为x的元素，要求空间复杂度为O(1)
  */
+
  /**
+  *
   * 解法1：遍历顺序表来新建一个顺序表，新的顺序表共享原顺序表L的空间；
-  * 解法2：将不为x的元素向前移位, 将不为x元素前移k个位置
+  * @param L
+  * @param e
+  * @return
+  */
+ int delNodeAll(OTList &L,ElemType e)
+ {
+     int i = 0;
+     // 新的顺序表的长度
+     int k =0;
+     for(i = 0;i < L.length;i++)
+     {
+         if(L.data[i] != e)
+         {
+             L.data[k] = L.data[i];
+             k++;
+         }
+     }
+     L.length = k;
+     return 0;
+ }
+/**
+ * 解法2：将不为x的元素向前移位, 将不为x元素前移k个位置
+ *
+ * @param L
+ * @param e
+ * @return
+ */
+ int delNodeAll2(OTList &L,ElemType e)
+ {
+     int i = 0;
+     int k = 0 ;
+     for(i = 0;i < L.length;i++)
+     {
+         if(L.data[i] == e)
+         {
+             k++;
+         }
+         L.data[i] = L.data[i+k];
+     }
+     L.length = L.length -k;
+     return 0;
+ }
+ /**
   *
   */
 
@@ -307,7 +353,50 @@ int reverseShiftTest()
   * 设计一个算法，从一给定的顺序表L中删除元素值在x到y(x<=y)之间的所有元素，要求以比较高的效率来实现，空间复杂度为O(1);
   * 同上的两种解法
   */
+  /**
+   * 解法1 共享原来的顺序表
+   * @param L
+   * @param e
+   * @return
+   */
+int delNodeAll3(OTList &L,ElemType x,ElemType y)
+ {
+    int i = 0;
+    int k = 0;
 
+    for(i = 0;i < L.length;i++)
+    {
+        if(L.data[i] < x||L.data[i] > y)
+        {
+            L.data[k] =L.data[i];
+            k++;
+        }
+    }
+    L.length = k;
+    return 0;
+ }
+/**
+ * 前移k位
+ * @param L
+ * @param x
+ * @param y
+ * @return
+ */
+ int delNodeAll4(OTList &L,ElemType x,ElemType y)
+ {
+    int i = 0;
+    int k = 0;
+    for(i =0 ;i<L.length;i++)
+    {
+        if(L.data[i]>=x&&L.data[i]<=y)
+        {
+            k++;
+        }
+        L.data[i] = L.data[k];
+    }
+    L.length = L.length -k;
+    return 0;
+ }
  /**
   * 设有一个顺序表L,其元素为整型数据，设计一个算法将L中所有小于0的整数放在前半部分，大于等于0的整数放在后半部分
 */
